@@ -290,6 +290,27 @@
         </div>
       </div>
     </div>
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <b><u>Important Note</u></b>
+        <p>
+          We’re in the process of a gradual rollout to ensure a smooth and
+          seamless experience for everyone. <br /><br />
+          As part of this phased approach,
+          <b>access is currently limited to a select group of users.</b>
+          <br /><br />
+
+          You will receive a notification with further instructions on how to
+          get started when the access is extended to you.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat"
+          >Close</a
+        >
+      </div>
+    </div>
     <footer class="page-footer custombg darken-4">
       <div class="container">
         <div class="row">
@@ -341,6 +362,14 @@
       </div>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var elems = document.querySelectorAll(".modal");
+        var instances = M.Modal.init(elems);
+        var instance = M.Modal.getInstance(document.querySelector("#modal1"));
+        instance.open(); // Open modal on page load
+      });
+    </script>
     <!-- <script>
       document.addEventListener("DOMContentLoaded", function () {
         var elems = document.querySelectorAll(".sidenav");
