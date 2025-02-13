@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="https://cdn-sharpsell-demo.enparadigmtech.com/smartsell/s3_utility/lledpoxrfavicon512x512.png"
+      type="image/jpeg"
+    />
+
+    <title>LIC's Sales Saathi</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Dosis:600|Roboto:400,700"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .custombg {
+        background-color: #00529b;
+      }
+      .custombg_light {
+        background-color: #ffca05;
+      }
+
+      /* Page Content Layout */
+      .page-content {
+        padding: 20px 0;
+        background-color: #e0e0e0;
+      }
+
+      .page-content .container {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        position: relative;
+      }
+
+      /* Sidebar Styles */
+      .sidebar {
+        width: 300px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+        padding: 15px;
+      }
+
+      .search-box {
+        width: 100% !important;
+        height: 40px !important;
+        padding: 0 12px !important;
+        border: 1px solid #e0e0e0 !important;
+        border-radius: 4px !important;
+        margin-bottom: 10px !important;
+        font-size: 14px !important;
+        box-sizing: border-box !important;
+      }
+
+      .search-box:focus {
+        border-bottom: 1px solid #00529b !important;
+        box-shadow: none !important;
+      }
+
+      .video-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        max-height: calc(70vh - 60px);
+        overflow-y: auto;
+      }
+
+      .video-item {
+        padding: 12px 15px;
+        cursor: pointer;
+        border-bottom: 1px solid #e0e0e0;
+        transition: background-color 0.2s ease;
+        margin-bottom: 0 !important;
+      }
+
+      .video-item:hover {
+        background-color: rgba(0, 82, 155, 0.1);
+      }
+
+      .video-item.active {
+        background-color: #00529b;
+        color: white;
+      }
+
+      /* Main Content Area */
+      .main-content {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background-color: #f5f5f5;
+        width: 100% !important;
+        margin-bottom: 20px;
+      }
+
+      .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 8px;
+      }
+
+      .video-title {
+        color: #00529b;
+        margin: 20px 0 10px;
+        font-size: 24px;
+        font-weight: 500;
+      }
+
+      .video-description {
+        color: #666;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      /* Custom Scrollbar */
+      .video-list::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .video-list::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+
+      .video-list::-webkit-scrollbar-thumb {
+        background: #00529b;
+        border-radius: 3px;
+      }
+
+      .video-list::-webkit-scrollbar-thumb:hover {
+        background: #003b6f;
+      }
+
+      /* Mobile Styles */
+      @media (max-width: 768px) {
+        .page-content .container {
+          flex-direction: column;
+          padding: 10px;
+        }
+
+        .sidebar {
+          width: 100%;
+          position: static;
+          height: auto;
+          transform: none;
+          margin-top: 20px;
+        }
+
+        .main-content {
+          width: 100%;
+          margin-top: 0;
+        }
+
+        .video-list {
+          max-height: none;
+          overflow-y: visible;
+        }
+
+        .video-item {
+          padding: 15px;
+        }
+
+        .video-title {
+          font-size: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body id="top">
+    <header>
+      <div class="section custombg darken-3">
+        <nav class="nav-wrapper transparent">
+          <div class="container" style="display: flex; align-items: center">
+            <img
+              src="https://cdn-sharpsell-demo.enparadigmtech.com/smartsell/s3_utility/lledpoxrfavicon512x512.png"
+              alt="logo"
+              class="responsive-img"
+              style="height: 50px; margin-right: 10px"
+            />
+            <span style="font-size: 30px">LIC's Sales Saathi</span>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <div class="page-content">
+      <div class="container">
+        <div class="main-content">
+          <div class="video-container">
+            <!-- Video iframe will be inserted here -->
+          </div>
+          <h2 class="video-title"></h2>
+          <p class="video-description"></p>
+        </div>
+        <div class="sidebar">
+          <input
+            type="text"
+            class="search-box"
+            placeholder="Search videos..."
+          />
+          <ul class="video-list">
+            <!-- Video list will be populated by JavaScript -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="section custombg_light darken-3" id="download">
+      <div class="container">
+        <h4 class="center black-text">Download Now</h4>
+        <div class="row center">
+          <div class="col s12 m6 l6 center-align" style="margin-top: 20px">
+            <a
+              href="https://apps.apple.com/in/app/lics-sales-saathi/id6667117496"
+              target="_blank"
+            >
+              <img
+                src="https://cdn-sharpsell-demo.enparadigmtech.com/smartsell/s3_utility/ovozhaifAppStore.png"
+                alt="Download on the App Store"
+                style="max-width: auto; height: 8vh"
+              />
+            </a>
+          </div>
+          <div class="col s12 m6 l6 center-align" style="margin-top: 20px">
+            <a
+              href="https://play.google.com/store/apps/details?id=com.lic.salessaathi"
+              target="_blank"
+            >
+              <img
+                src="https://cdn-sharpsell-demo.enparadigmtech.com/smartsell/s3_utility/yzqafbvwGooglePlay.png"
+                alt="Get it on Google Play"
+                style="max-width: auto; height: 8vh"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="page-footer custombg darken-4">
+      <div class="container">
+        <div class="row">
+          <div class="col s12 center">
+            <p>
+              <a href="./privacy-policy.html" style="color: white"
+                >Privacy Policy</a
+              >
+            </p>
+            <hr />
+            <p class="white-text">
+              &copy; 2024-25 LIC's Sales Saathi. All rights reserved. Maintained
+              by
+              <a href="https://sharpsell.ai" target="_blank" class="white-text"
+                >Sharpsell.ai.</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      // Sample video data
+      const videoLibrary = {
+        videos: [
+          {
+            id: 1,
+            title: "1. Product Insights at Fingertips",
+            description:
+              "Get details on the features, advantages and benefits of each plan.",
+            youtubeId: "aNMspc53BW8",
+          },
+          {
+            id: 2,
+            title: "2. Generate Plan Presentation and Quote",
+            description:
+              "Create a personalized quote and plan presentation for each customer.",
+            youtubeId: "z3qXcI3JsKc",
+          },
+          {
+            id: 3,
+            title: "3. Personalize Poster of the Day",
+            description:
+              "Engage with existing customers and prospects with personalized posters.",
+            youtubeId: "58gaZApnvCQ",
+          },
+          {
+            id: 4,
+            title: "4. Share Digital Visiting Card",
+            description:
+              "Introduce yourself and build credibility by sharing a digital visiting card.",
+            youtubeId: "5PlYGlhnyfo",
+          },
+        ],
+      };
+
+      // DOM Elements
+      const videoList = document.querySelector(".video-list");
+      const videoContainer = document.querySelector(".video-container");
+      const videoTitle = document.querySelector(".video-title");
+      const videoDescription = document.querySelector(".video-description");
+      const searchBox = document.querySelector(".search-box");
+
+      // Functions
+      function createVideoElement(videoId) {
+        return `<iframe 
+          width="560" 
+          height="315" 
+          src="https://www.youtube.com/embed/${videoId}" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>`;
+      }
+
+      function updateActiveVideo(video) {
+        // Update video player
+        videoContainer.innerHTML = createVideoElement(video.youtubeId);
+        videoTitle.textContent = video.title;
+        videoDescription.textContent = video.description;
+
+        // Update active state in sidebar
+        document.querySelectorAll(".video-item").forEach((item) => {
+          item.classList.remove("active");
+          if (item.dataset.id === video.id.toString()) {
+            item.classList.add("active");
+          }
+        });
+      }
+
+      function renderVideoList(videos) {
+        videoList.innerHTML = videos
+          .map(
+            (video) => `
+              <li class="video-item" data-id="${video.id}">
+                ${video.title}
+              </li>
+            `
+          )
+          .join("");
+
+        // Add click handlers
+        document.querySelectorAll(".video-item").forEach((item) => {
+          item.addEventListener("click", () => {
+            const video = videoLibrary.videos.find(
+              (v) => v.id.toString() === item.dataset.id
+            );
+            updateActiveVideo(video);
+          });
+        });
+      }
+
+      function filterVideos(searchTerm) {
+        const filteredVideos = videoLibrary.videos.filter(
+          (video) =>
+            video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            video.description.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        renderVideoList(filteredVideos);
+      }
+
+      // Event Listeners
+      searchBox.addEventListener("input", (e) => {
+        filterVideos(e.target.value);
+      });
+
+      // Initial Setup
+      renderVideoList(videoLibrary.videos);
+      if (videoLibrary.videos.length > 0) {
+        updateActiveVideo(videoLibrary.videos[0]);
+      }
+    </script>
+  </body>
+</html>
