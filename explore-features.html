@@ -216,6 +216,18 @@
           <p class="video-description"></p>
         </div>
         <div class="sidebar">
+          <div
+            class="language-toggle"
+            style="display: flex; gap: 10px; margin-bottom: 10px"
+          >
+            <button class="btn-small blue darken-1 white-text" id="englishBtn">
+              English
+            </button>
+            <button class="btn-small amber darken-2 white-text" id="hindiBtn">
+              हिन्दी
+            </button>
+          </div>
+
           <input
             type="text"
             class="search-box"
@@ -284,12 +296,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
-      // Sample video data
       const videoLibrary = {
-        videos: [
+        english: [
           {
             id: 1,
-            title: "1. Product Insights at Fingertips",
+            title: "1. Plan Insights at Fingertips",
             description:
               "Get details on the features, advantages and benefits of each plan.",
             youtubeId: "aNMspc53BW8",
@@ -316,16 +327,45 @@
             youtubeId: "5PlYGlhnyfo",
           },
         ],
+        hindi: [
+          {
+            id: 101,
+            title: "1. योजना की पूरी जानकारी",
+            description:
+              "हर योजना की विशेषताओं, लाभों और फायदे की जानकारी पाएं।",
+            youtubeId: "7bSEk520LSY",
+          },
+          {
+            id: 102,
+            title: "2. योजना प्रस्तुति और प्रीमियम गणना",
+            description:
+              "प्रत्येक ग्राहक के लिए एक व्यक्तिगत प्रस्तुति और प्रीमियम गणना करें।",
+            youtubeId: "aFMkzwxd5pw",
+          },
+          {
+            id: 103,
+            title: "3. व्यक्तिगत पोस्टर बनाएं",
+            description: "ग्राहकों से जुड़ने के लिए व्यक्तिगत पोस्टर बनाएं।",
+            youtubeId: "7aPTGLVTc-E",
+          },
+          {
+            id: 104,
+            title: "4. डिजिटल विज़िटिंग कार्ड भेजें",
+            description:
+              "डिजिटल विज़िटिंग कार्ड से अपना परिचय दें और विश्वास जीतें।",
+            youtubeId: "7bSEk520LSY",
+          },
+        ],
       };
 
-      // DOM Elements
       const videoList = document.querySelector(".video-list");
       const videoContainer = document.querySelector(".video-container");
       const videoTitle = document.querySelector(".video-title");
       const videoDescription = document.querySelector(".video-description");
       const searchBox = document.querySelector(".search-box");
 
-      // Functions
+      let currentLanguage = "english";
+
       function createVideoElement(videoId) {
         return `<iframe 
           width="560" 
@@ -338,12 +378,10 @@
       }
 
       function updateActiveVideo(video) {
-        // Update video player
         videoContainer.innerHTML = createVideoElement(video.youtubeId);
         videoTitle.textContent = video.title;
         videoDescription.textContent = video.description;
 
-        // Update active state in sidebar
         document.querySelectorAll(".video-item").forEach((item) => {
           item.classList.remove("active");
           if (item.dataset.id === video.id.toString()) {
@@ -356,17 +394,15 @@
         videoList.innerHTML = videos
           .map(
             (video) => `
-              <li class="video-item" data-id="${video.id}">
-                ${video.title}
-              </li>
-            `
+            <li class="video-item" data-id="${video.id}">
+              ${video.title}
+            </li>`
           )
           .join("");
 
-        // Add click handlers
         document.querySelectorAll(".video-item").forEach((item) => {
           item.addEventListener("click", () => {
-            const video = videoLibrary.videos.find(
+            const video = videoLibrary[currentLanguage].find(
               (v) => v.id.toString() === item.dataset.id
             );
             updateActiveVideo(video);
@@ -375,7 +411,7 @@
       }
 
       function filterVideos(searchTerm) {
-        const filteredVideos = videoLibrary.videos.filter(
+        const filteredVideos = videoLibrary[currentLanguage].filter(
           (video) =>
             video.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
             video.description.toLowerCase().includes(searchTerm.toLowerCase())
@@ -383,16 +419,29 @@
         renderVideoList(filteredVideos);
       }
 
-      // Event Listeners
+      document.getElementById("englishBtn").addEventListener("click", () => {
+        loadVideosByLanguage("english");
+      });
+
+      document.getElementById("hindiBtn").addEventListener("click", () => {
+        loadVideosByLanguage("hindi");
+      });
+
       searchBox.addEventListener("input", (e) => {
         filterVideos(e.target.value);
       });
 
-      // Initial Setup
-      renderVideoList(videoLibrary.videos);
-      if (videoLibrary.videos.length > 0) {
-        updateActiveVideo(videoLibrary.videos[0]);
+      function loadVideosByLanguage(language) {
+        currentLanguage = language;
+        const videos = videoLibrary[language];
+        renderVideoList(videos);
+        if (videos.length > 0) {
+          updateActiveVideo(videos[0]);
+        }
       }
+
+      // Initial Load
+      loadVideosByLanguage("english");
     </script>
   </body>
 </html>
