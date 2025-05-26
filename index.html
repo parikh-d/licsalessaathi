@@ -1,457 +1,603 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="icon"
-      href="https://cdn-sharpsell-demo.enparadigmtech.com/smartsell/s3_utility/lledpoxrfavicon512x512.png"
-      type="image/jpeg"
-    />
-
-    <title>LIC's Sales Saathi</title>
-    <link
-      href="https://fonts.googleapis.com/css?family=Dosis:600|Roboto:400,700"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kotak Life Learning App</title>
     <style>
-      .custombg {
-        background-color: #00529b;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
       }
-      .custombg_light {
-        background-color: #ffca05;
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        overflow-x: hidden;
+      }
+
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Tablet and Desktop Responsive */
+      @media (min-width: 768px) {
+        .container {
+          max-width: 720px;
+          padding: 0 30px;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .container {
+          max-width: 1200px;
+          padding: 0 40px;
+        }
+      }
+
+      /* Header */
+      .header {
+        background: linear-gradient(135deg, #003874 0%, #004a95 100%);
+        color: white;
+        padding: 60px 0 80px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(237, 28, 36, 0.1) 0%,
+          transparent 70%
+        );
+        animation: pulse 4s ease-in-out infinite;
+      }
+
+      .logo {
+        font-size: 28px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .tagline {
+        font-size: 16px;
+        opacity: 0.9;
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero-title {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+        animation: slideUp 0.8s ease-out;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+        opacity: 0.9;
+        position: relative;
+        z-index: 2;
+        animation: slideUp 0.8s ease-out 0.2s both;
+      }
+
+      /* Desktop Header Styles */
+      @media (min-width: 768px) {
+        .header {
+          padding: 80px 0 100px;
+        }
+
+        .logo {
+          font-size: 36px;
+        }
+
+        .tagline {
+          font-size: 18px;
+        }
+
+        .hero-title {
+          font-size: 48px;
+          margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+          font-size: 22px;
+          max-width: 600px;
+          margin: 0 auto;
+        }
+      }
+
+      /* Features */
+      .features {
+        padding: 60px 0;
+        background: #f8f9fa;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      /* Tablet Features Layout */
+      @media (min-width: 768px) {
+        .features {
+          padding: 80px 0;
+        }
+
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 30px;
+        }
+      }
+
+      /* Desktop Features Layout */
+      @media (min-width: 1024px) {
+        .features {
+          padding: 100px 0;
+        }
+
+        .features-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 40px;
+          max-width: 900px;
+          margin: 0 auto;
+        }
+      }
+
+      .feature-card {
+        background: white;
+        border-radius: 20px;
+        padding: 30px 25px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #ed1c24;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeInUp 0.6s ease-out;
+        height: fit-content;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      .feature-card:nth-child(even) {
+        border-left-color: #003874;
+      }
+
+      /* Desktop Feature Cards */
+      @media (min-width: 768px) {
+        .feature-card {
+          padding: 40px 35px;
+        }
+
+        .feature-icon {
+          width: 70px;
+          height: 70px;
+          font-size: 28px;
+        }
+
+        .feature-title {
+          font-size: 22px;
+        }
+
+        .feature-description {
+          font-size: 16px;
+        }
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 20px;
+        background: linear-gradient(135deg, #003874, #004a95);
+        color: white;
+      }
+
+      .feature-card:nth-child(even) .feature-icon {
+        background: linear-gradient(135deg, #ed1c24, #ff3a45);
+      }
+
+      .feature-title {
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #003874;
+      }
+
+      .feature-description {
+        color: #666;
+        line-height: 1.5;
+      }
+
+      /* CTA Section */
+      .cta-section {
+        background: linear-gradient(135deg, #ed1c24 0%, #ff3a45 100%);
+        color: white;
+        padding: 60px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(0, 56, 116, 0.1) 0%,
+          transparent 70%
+        );
+        animation: pulse 6s ease-in-out infinite reverse;
+      }
+
+      .cta-title {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .cta-subtitle {
+        font-size: 16px;
+        opacity: 0.9;
+        margin-bottom: 30px;
+        position: relative;
+        z-index: 2;
+      }
+
+      .download-btn {
+        background: white;
+        color: #ed1c24;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .download-btn:hover {
+        background: #f0f0f0;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .download-btn:active {
+        transform: translateY(0);
+      }
+
+      /* Desktop CTA Styles */
+      @media (min-width: 768px) {
+        .cta-section {
+          padding: 80px 0;
+        }
+
+        .cta-title {
+          font-size: 36px;
+          margin-bottom: 20px;
+        }
+
+        .cta-subtitle {
+          font-size: 20px;
+          margin-bottom: 40px;
+          max-width: 500px;
+          margin-left: auto;
+          margin-right: auto;
+          margin-bottom: 40px;
+        }
+
+        .download-btn {
+          padding: 18px 50px;
+          font-size: 20px;
+        }
+      }
+
+      /* Footer */
+      .footer {
+        background: #003874;
+        color: white;
+        text-align: center;
+        padding: 40px 0;
+      }
+
+      .footer-text {
+        opacity: 0.8;
+        font-size: 14px;
+      }
+
+      /* Desktop Footer Styles */
+      @media (min-width: 768px) {
+        .footer {
+          padding: 50px 0;
+        }
+
+        .footer-text {
+          font-size: 16px;
+        }
+      }
+
+      /* Animations */
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.8;
+        }
+      }
+
+      /* Scroll animations */
+      .animate-on-scroll {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+      }
+
+      .animate-on-scroll.animated {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Mobile optimizations */
+      @media (max-width: 480px) {
+        .container {
+          padding: 0 15px;
+        }
+
+        .hero-title {
+          font-size: 28px;
+        }
+
+        .feature-card {
+          padding: 25px 20px;
+        }
+      }
+
+      /* Large Desktop Styles */
+      @media (min-width: 1200px) {
+        .hero-title {
+          font-size: 56px;
+        }
+
+        .hero-subtitle {
+          font-size: 24px;
+        }
+
+        .features-grid {
+          max-width: 1000px;
+          gap: 50px;
+        }
+
+        .cta-title {
+          font-size: 42px;
+        }
+
+        .cta-subtitle {
+          font-size: 22px;
+        }
       }
     </style>
   </head>
-  <body id="top">
-    <header>
-      <div class="section custombg darken-3">
-        <nav class="nav-wrapper transparent">
-          <div class="container" style="display: flex; align-items: center">
-            <img
-              src="https://cdn-sharpsell-demo.enparadigmtech.com/smartsell/s3_utility/lledpoxrfavicon512x512.png"
-              alt="logo"
-              class="responsive-img"
-              style="height: 50px; margin-right: 10px"
-            />
-            <span style="font-size: 30px">LIC's Sales Saathi</span>
-          </div>
-        </nav>
-        <ul class="sidenav" id="mobile-nav">
-          <li><a href="#">Home</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#download">Download Now</a></li>
-        </ul>
-        <div class="container white-text">
-          <div class="row">
-            <div class="col s12 m6">
-              <img
-                src="https://cdn-sharpsell-demo.enparadigmtech.com/smartsell/s3_utility/auofhcjdHomeScreenLogos2.png"
-                alt="Image"
-                class="responsive-img"
-                style="padding-top: 2.8rem"
-              />
-            </div>
-            <div class="col s12 m6">
-              <h3>LIC's Sales Saathi</h3>
-              <p>The official LIC App for Life Insurance Sales encompassing</p>
-              <ul>
-                <li>
-                  <i class="fas fa-check-circle"></i> Product Pitch and Quote
-                  Generation
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Collateral Personalization
-                  and Sharing
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Lead Generation Tools
-                </li>
-              </ul>
-              <a
-                class="btn blue-text text-darken-3"
-                style="background-color: #ffca05; font-weight: bold"
-                href="./explore-features.html"
-                target="_blank"
-                >Start Exploring</a
-              >
-            </div>
-          </div>
-        </div>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="logo">Kotak Life</div>
+        <h1 class="hero-title">Learn & Grow</h1>
+        <p class="hero-subtitle">
+          Master skills with AI-powered learning modules and interactive
+          roleplays
+        </p>
       </div>
     </header>
-    <div class="page-content">
-      <div class="section" id="features">
-        <div class="container">
-          <div class="row">
-            <div class="col s12 m4">
-              <div class="icon-block">
-                <h2 class="center blue-text text-darken-4">
-                  <i class="fas fa-bullhorn"></i>
-                </h2>
-                <h5 class="center">Product Pitch</h5>
-                <p class="light center">
-                  Personalized sales pitch for all products based on customer
-                  persona.
-                </p>
-              </div>
-            </div>
-            <div class="col s12 m4">
-              <div class="icon-block">
-                <h2 class="center blue-text text-darken-4">
-                  <i class="fas fa-money-check-alt"></i>
-                </h2>
-                <h5 class="center">Quote Generation</h5>
-                <p class="light center">
-                  Quick premium calculation based on customer requirements.
-                </p>
-              </div>
-            </div>
-            <div class="col s12 m4">
-              <div class="icon-block">
-                <h2 class="center blue-text text-darken-4">
-                  <i class="fas fa-book"></i>
-                </h2>
-                <h5 class="center">Ready Reckoners</h5>
-                <p class="light center">
-                  Product details with key pointers, FAQs, one-pagers, brochures
-                  etc.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col s12 m4">
-              <div class="icon-block">
-                <h2 class="center blue-text text-darken-4">
-                  <i class="fas fa-envelope"></i>
-                </h2>
-                <h5 class="center">Communication Module</h5>
-                <p class="light center">
-                  Share product collaterals via multiple modes – Whatsapp, SMS,
-                  Email.
-                </p>
-              </div>
-            </div>
-            <div class="col s12 m4">
-              <div class="icon-block">
-                <h2 class="center blue-text text-darken-4">
-                  <i class="fas fa-folder-open"></i>
-                </h2>
-                <h5 class="center">Co-Branded Collateral</h5>
-                <p class="light center">
-                  Create, personalize and share collateral with your contact
-                  details.
-                </p>
-              </div>
-            </div>
-            <div class="col s12 m4">
-              <div class="icon-block">
-                <h2 class="center blue-text text-darken-4">
-                  <i class="fas fa-user-plus"></i>
-                </h2>
-                <h5 class="center">Lead Generation</h5>
-                <p class="light center">
-                  Capture prospect and lead details from social networks with
-                  need-based tools.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- <div class="section grey lighten-4">
-        <div class="container">
-          <div class="row">
-            <div class="col s12 m6">
-              <img src="./port-final.png" alt="Image" class="responsive-img" />
-            </div>
-            <div class="col s12 m6">
-              <h2>What is LIC's Sales Saathi?</h2>
-              <p>
-                Add a brief story about your app here, what purpose your app
-                solves, and why you think your user would want to have it on
-                their device.
-              </p>
-              <ul>
-                <li>
-                  <i class="fas fa-check-circle"></i> Amazing Design to Present
-                  Your App
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Fully Responsive and
-                  Powered by Materialize
-                </li>
-                <li>
-                  <i class="fas fa-check-circle"></i> Very Easy to Customize and
-                  Setup
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="section"></div> -->
-      <!-- <div class="section">
-        <div class="container">
-          <h2 class="center">What our customers are saying</h2>
-          <p class="light center">
-            Real user testimonials are a great way to attract new customers and
-            increase their trust in using your app.
-          </p>
-          <div class="row">
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-content">
-                  <p>
-                    LIC's Sales Saathi is awesome and I can't imagine working on
-                    my projects without it. It has saved me countless hours of
-                    time and has increased my productivity.
-                  </p>
-                </div>
-                <div class="card-action">
-                  <img
-                    src="images/user1.jpg"
-                    alt="User 1"
-                    class="circle responsive-img"
-                    style="width: 50px"
-                  />
-                  <span>Patrick Harry, CEO, Awesome Inc.</span>
-                </div>
-              </div>
-            </div>
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-content">
-                  <p>
-                    LIC's Sales Saathi is awesome and I can't imagine working on
-                    my projects without it. It has saved me countless hours of
-                    time and has increased my productivity.
-                  </p>
-                </div>
-                <div class="card-action">
-                  <img
-                    src="images/user2.jpg"
-                    alt="User 2"
-                    class="circle responsive-img"
-                    style="width: 50px"
-                  />
-                  <span>Jeanne Lawson, Designer, Awesome Inc.</span>
-                </div>
-              </div>
-            </div>
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-content">
-                  <p>
-                    LIC's Sales Saathi is awesome and I can't imagine working on
-                    my projects without it. It has saved me countless hours of
-                    time and has increased my productivity.
-                  </p>
-                </div>
-                <div class="card-action">
-                  <img
-                    src="images/user3.jpg"
-                    alt="User 3"
-                    class="circle responsive-img"
-                    style="width: 50px"
-                  />
-                  <span>Robin Barnes, Developer, Awesome Inc.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <!-- <div class="section custombg_light darken-3" id="download">
-        <div class="container">
-          <h4 class="center black-text">Download Now</h4>
-          <div class="row center">
-            <div class="col s12 m6 l6 center-align" style="margin-top: 20px">
-              <a
-                href="https://apps.apple.com/in/app/lics-sales-saathi/id6667117496"
-                class="btn-large white blue-text text-darken-3 waves-effect waves-light"
-                ><i class="fab fa-apple left"></i>App Store</a
-              >
-            </div>
-            <div class="col s12 m6 l6 center-align" style="margin-top: 20px">
-              <a
-                href="https://play.google.com/store/apps/details?id=com.lic.salessaathi"
-                class="btn-large white blue-text text-darken-3 waves-effect waves-light"
-                ><i class="fab fa-google-play left"></i>Play Store</a
-              >
-            </div>
-          </div>
-        </div>
-      </div> -->
-      <div class="section custombg_light darken-3" id="download">
-        <div class="container">
-          <h4 class="center black-text">Download Now</h4>
-          <div class="row center">
-            <div class="col s12 m6 l6 center-align" style="margin-top: 20px">
-              <a
-                href="https://apps.apple.com/in/app/lics-sales-saathi/id6667117496"
-                target="_blank"
-              >
-                <img
-                  src="https://cdn-sharpsell-demo.enparadigmtech.com/smartsell/s3_utility/ovozhaifAppStore.png"
-                  alt="Download on the App Store"
-                  style="max-width: auto; height: 8vh"
-                />
-              </a>
-            </div>
-            <div class="col s12 m6 l6 center-align" style="margin-top: 20px">
-              <a
-                href="https://play.google.com/store/apps/details?id=com.lic.salessaathi"
-                target="_blank"
-              >
-                <img
-                  src="https://cdn-sharpsell-demo.enparadigmtech.com/smartsell/s3_utility/yzqafbvwGooglePlay.png"
-                  alt="Get it on Google Play"
-                  style="max-width: auto; height: 8vh"
-                />
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Modal Structure -->
-    <div id="modal1" class="modal">
-      <!-- New Section for WhatsApp Channel -->
-      <div style="margin-top: 20px; text-align: center">
-        <p>
-          <b>For regular updates:</b>
-        </p>
-        <a
-          href="https://whatsapp.com/channel/0029VakKW6FAzNbwYkWbFz1p"
-          target="_blank"
-          class="btn waves-effect waves-light green darken-3"
-          style="margin-top: 5px; margin-bottom: 10px"
-          ><i class="fab fa-whatsapp left"></i>Join WhatsApp Channel</a
-        >
-      </div>
-      <hr />
-      <div style="margin-top: 20px; text-align: center">
-        <p>
-          <b>Explore features:</b>
-        </p>
-        <a
-          href="./explore-features.html"
-          target="_blank"
-          class="btn blue-text text-darken-3"
-          style="background-color: #ffca05; font-weight: bold"
-          ><i class="fas fa-mobile-alt"></i> Start Exploring</a
-        >
-      </div>
-      <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat"
-          >Close</a
-        >
-      </div>
-    </div>
 
-    <footer class="page-footer custombg darken-4">
+    <!-- Features -->
+    <section class="features">
       <div class="container">
-        <div class="row">
-          <!-- <div class="col s12 center">
-            <a
-              href="#"
-              class="btn-floating btn-large waves-effect waves-light white blue-text text-darken-3"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
-            <a
-              href="#"
-              class="btn-floating btn-large waves-effect waves-light white blue-text text-darken-3"
-              ><i class="fab fa-twitter"></i
-            ></a>
-            <a
-              href="#"
-              class="btn-floating btn-large waves-effect waves-light white blue-text text-darken-3"
-              ><i class="fab fa-google-plus-g"></i
-            ></a>
-            <a
-              href="#"
-              class="btn-floating btn-large waves-effect waves-light white blue-text text-darken-3"
-              ><i class="fab fa-instagram"></i
-            ></a>
-          </div> -->
-          <div class="col s12 center">
-            <!-- <p>
-              <a
-                href="https://support.licsalessaathi.in/portal/"
-                target="_blank"
-                style="color: white"
-                >Help Centre</a
-              >
-            </p> -->
-            <p>
-              <a href="./privacy-policy.html" style="color: white"
-                >Privacy Policy</a
-              >
+        <div class="features-grid">
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">📚</div>
+            <h3 class="feature-title">Interactive Learning Modules</h3>
+            <p class="feature-description">
+              Engage with comprehensive learning modules designed to enhance
+              your knowledge and skills in insurance and finance.
             </p>
-            <hr />
-            <p class="white-text">
-              &copy; 2024-25 LIC's Sales Saathi. All rights reserved. Maintained
-              by
-              <a href="https://sharpsell.ai" target="_blank" class="white-text"
-                >Sharpsell.ai.</a
-              >
+          </div>
+
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">🤖</div>
+            <h3 class="feature-title">AI Roleplay Scenarios</h3>
+            <p class="feature-description">
+              Practice real-world situations with AI-powered roleplay scenarios
+              that adapt to your learning pace and style.
+            </p>
+          </div>
+
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title">Progress Tracking</h3>
+            <p class="feature-description">
+              Monitor your learning journey with detailed analytics and
+              personalized recommendations for continuous improvement.
+            </p>
+          </div>
+
+          <div class="feature-card animate-on-scroll">
+            <div class="feature-icon">🎯</div>
+            <h3 class="feature-title">Skill Assessment</h3>
+            <p class="feature-description">
+              Test your knowledge with adaptive assessments that help identify
+              areas for growth and mastery.
             </p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-title">Ready to Transform Your Learning?</h2>
+        <p class="cta-subtitle">
+          Download the app and start your journey to excellence
+        </p>
+        <button class="download-btn" onclick="downloadApp()">
+          Download Now
+        </button>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p class="footer-text">
+          © 2025 Kotak Life Insurance. Empowering learning and growth.
+        </p>
       </div>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var elems = document.querySelectorAll(".modal");
-        var instances = M.Modal.init(elems);
+      // Scroll animation
+      function animateOnScroll() {
+        const elements = document.querySelectorAll(".animate-on-scroll");
 
-        setTimeout(function () {
-          var instance = M.Modal.getInstance(document.querySelector("#modal1"));
-          instance.open(); // Open modal after 5 seconds
-        }, 5000); // 5000ms = 5 seconds
-      });
-    </script>
+        elements.forEach((element) => {
+          const elementTop = element.getBoundingClientRect().top;
+          const elementVisible = 150;
 
-    <!-- <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var elems = document.querySelectorAll(".sidenav");
-        var instances = M.Sidenav.init(elems);
-        var carouselElems = document.querySelectorAll(".carousel");
-        var carouselInstances = M.Carousel.init(carouselElems, {
-          fullWidth: true,
-          indicators: true,
+          if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add("animated");
+          }
+        });
+      }
+
+      // Download button functionality
+      function downloadApp() {
+        // Add a subtle animation
+        const btn = document.querySelector(".download-btn");
+        btn.style.transform = "scale(0.95)";
+
+        setTimeout(() => {
+          btn.style.transform = "scale(1)";
+          // Redirect to Google Play Store
+          window.open(
+            "https://play.google.com/store/apps/details?id=com.sharpsell.sharpsellappandroid&hl=en_IN",
+            "_blank"
+          );
+        }, 150);
+      }
+
+      // Add click ripple effect to feature cards
+      document.querySelectorAll(".feature-card").forEach((card) => {
+        card.addEventListener("click", function (e) {
+          const ripple = document.createElement("div");
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+
+          ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: radial-gradient(circle, rgba(0,56,116,0.1) 0%, transparent 70%);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+
+          this.style.position = "relative";
+          this.style.overflow = "hidden";
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
         });
       });
+
+      // Add ripple animation
+      const style = document.createElement("style");
+      style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // Initialize scroll animations
+      window.addEventListener("scroll", animateOnScroll);
+      window.addEventListener("load", animateOnScroll);
+
+      // Add smooth scrolling
+      document.documentElement.style.scrollBehavior = "smooth";
+
+      // Stagger animation delays for feature cards
+      document.querySelectorAll(".feature-card").forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
     </script>
-    <script type="text/javascript">
-      var $zoho = $zoho || {};
-      $zoho.salesiq = $zoho.salesiq || {
-        widgetcode:
-          "siq205285990bdab2f6f493d072e5f4e4be080aec84d99f43dadf86ebb76ccdcb46",
-        values: {},
-        ready: function () {},
-      };
-      var d = document;
-      var s = d.createElement("script");
-      s.type = "text/javascript";
-      s.id = "zsiqscript";
-      s.defer = true;
-      s.src = "https://salesiq.zoho.in/widget";
-      s.async = true;
-      var t = d.getElementsByTagName("script")[0];
-      t.parentNode.insertBefore(s, t);
-    </script> -->
   </body>
 </html>
